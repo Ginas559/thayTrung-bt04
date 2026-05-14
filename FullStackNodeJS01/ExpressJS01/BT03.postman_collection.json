@@ -1,0 +1,341 @@
+{
+  "info": {
+    "_postman_id": "732237a1-e0f8-4fee-9bb0-0319eda50be6",
+    "name": "BT03",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "48493750"
+  },
+  "item": [
+    {
+      "name": "New Request",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "name",
+              "value": "Bùi Thanh Tùng",
+              "type": "text",
+              "uuid": "9d410a67-d047-4b34-b030-e3305b9d75d9"
+            },
+            {
+              "key": "email",
+              "value": "luubaitapso3@gmail.com",
+              "type": "text",
+              "uuid": "452d4954-827c-4b26-a449-a7ce654e7d8e"
+            },
+            {
+              "key": "password",
+              "value": "123456",
+              "type": "text",
+              "uuid": "8d87efe8-e80d-4fbb-a188-3db92edcc716"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:8080/v1/api/register",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "v1",
+            "api",
+            "register"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "New Request",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "name",
+                  "value": "Bùi Thanh Tùng",
+                  "type": "text",
+                  "uuid": "9d410a67-d047-4b34-b030-e3305b9d75d9"
+                },
+                {
+                  "key": "email",
+                  "value": "luubaitapso3@gmail.com",
+                  "type": "text",
+                  "uuid": "452d4954-827c-4b26-a449-a7ce654e7d8e"
+                },
+                {
+                  "key": "password",
+                  "value": "123456",
+                  "type": "text",
+                  "uuid": "8d87efe8-e80d-4fbb-a188-3db92edcc716"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:8080/v1/api/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "v1",
+                "api",
+                "register"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "189"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"bd-BZ5r/H23hiasjhqTvrL027MPImw\""
+            },
+            {
+              "key": "Date",
+              "value": "Mon, 11 May 2026 06:51:52 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"name\": \"Bùi Thanh Tùng\",\n    \"email\": \"luubaitapso3@gmail.com\",\n    \"password\": \"$2b$10$ESxUP.ndxDOAEDVO0./K1OuXOf1P8GGRneTg1igLagcjtp2ThKHAC\",\n    \"role\": \"User\",\n    \"_id\": \"6a017c88309970e908698474\",\n    \"__v\": 0\n}"
+        }
+      ]
+    },
+    {
+      "name": "New Request",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "email",
+              "value": "luubaitapso3@gmail",
+              "type": "text",
+              "uuid": "71196cd3-768f-4325-a02c-ebcd5b875e62"
+            },
+            {
+              "key": "password",
+              "value": "123456",
+              "type": "text",
+              "uuid": "ac6df303-de14-46ab-84f9-71bfae3e8f39"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:8080/v1/api/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "v1",
+            "api",
+            "login"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "New Request",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "email",
+                  "value": "luubaitapso3@gmail.com",
+                  "type": "text",
+                  "uuid": "71196cd3-768f-4325-a02c-ebcd5b875e62"
+                },
+                {
+                  "key": "password",
+                  "value": "123456",
+                  "type": "text",
+                  "uuid": "ac6df303-de14-46ab-84f9-71bfae3e8f39"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:8080/v1/api/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "v1",
+                "api",
+                "login"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "301"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"12d-8KY5Lfb7mggebxKqaOMPK+vx5Hc\""
+            },
+            {
+              "key": "Date",
+              "value": "Mon, 11 May 2026 07:03:28 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"EC\": 0,\n    \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1dWJhaXRhcHNvM0BnbWFpbC5jb20iLCJuYW1lIjoiQsO5aSBUaGFuaCBUw7luZyIsImlhdCI6MTc3ODQ4MzAwOCwiZXhwIjoxNzc4NzQyMjA4fQ.xCwfawMGFKPwqhlitqu--PiPU5-avbnRN7ucIWAoLRo\",\n    \"user\": {\n        \"email\": \"luubaitapso3@gmail.com\",\n        \"name\": \"Bùi Thanh Tùng\"\n    }\n}"
+        }
+      ]
+    },
+    {
+      "name": "New Request",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1dWJhaXRhcHNvM0BnbWFpbC5jb20iLCJuYW1lIjoiQsO5aSBUaGFuaCBUw7luZyIsImlhdCI6MTc3ODQ4MzAwOCwiZXhwIjoxNzc4NzQyMjA4fQ.xCwfawMGFKPwqhlitqu--PiPU5-avbnRN7ucIWAoLRo",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/v1/api",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "v1",
+            "api"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "New Request",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/v1/api",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "v1",
+                "api"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "17"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"11-sApp388r/xfSQ8PLNaO6BIiWQy0\""
+            },
+            {
+              "key": "Date",
+              "value": "Mon, 11 May 2026 07:04:04 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "\"Hello world api\""
+        }
+      ]
+    }
+  ]
+}
