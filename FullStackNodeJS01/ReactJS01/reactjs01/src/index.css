@@ -35,3 +35,24 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+.product-detail-swiper {
+  width: 100% !important;
+  max-width: 760px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  overflow: hidden !important;
+}
+
+.product-detail-swiper .swiper-wrapper {
+  width: 100% !important;
+}
+
+.product-detail-swiper .swiper-slide {
+  width: 100% !important;
+  flex-shrink: 0;
+}
+
+.product-detail-swiper .swiper-slide > div {
+  width: 100% !important;
+}

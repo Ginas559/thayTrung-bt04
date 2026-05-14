@@ -11,6 +11,9 @@ import RegisterPage from './pages/register.jsx';
 import UserPage from './pages/user.jsx';
 import HomePage from './pages/home.jsx';
 import LoginPage from './pages/login.jsx';
+import ProductDetailPage from './pages/productDetail.jsx';
+import NewsDetailPage from './pages/newsDetail.jsx';
+import ArticleDetailPage from './pages/articleDetail.jsx';
 import { Provider } from 'react-redux';
 import store from './redux/store.js';
 
@@ -26,6 +29,18 @@ const router = createBrowserRouter([
             {
                 path: "user",
                 element: <UserPage />
+            },
+            {
+                path: "product/:slug",
+                element: <ProductDetailPage />
+            },
+            {
+                path: "news/:slug",
+                element: <NewsDetailPage />
+            },
+            {
+                path: "article/:slug",
+                element: <ArticleDetailPage />
             },
         ]
     },
