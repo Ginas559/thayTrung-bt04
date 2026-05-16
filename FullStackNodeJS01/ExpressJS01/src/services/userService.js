@@ -41,7 +41,8 @@ const loginService = async (email, password) => {
             } else {
                 const payload = {
                     email: user.email,
-                    name: user.name
+                    name: user.name,
+                    role: user.role || 'User'
                 }
                 const access_token = jwt.sign(
                     payload,
@@ -83,6 +84,40 @@ const getUserService = async () => {
     }
 }
 
+const ensureAdminExists = async () => {
+    try {
+        // ensure dotenv loads .env from current working directory
+        try {
+            const path = require('path');
+            require('dotenv').config({ path: path.join(process.cwd(), '.env') });
+        } catch (e) {
+            // ignore
+        }
+        const adminEmail = process.env.ADMIN_EMAIL;
+        const adminPassword = process.env.ADMIN_PASSWORD;
+        if (!adminEmail || !adminPassword) {
+            console.log('>>> Admin credentials not provided in .env');
+            return;
+        }
+
+        let admin = await User.findOne({ email: adminEmail });
+        if (!admin) {
+            const hashPassword = await bcrypt.hash(adminPassword, saltRounds);
+            admin = await User.create({
+                name: 'Admin',
+                email: adminEmail,
+                password: hashPassword,
+                role: 'Admin'
+            });
+            console.log(`>>> Admin user created: ${adminEmail}`);
+        } else {
+            console.log(`>>> Admin user already exists: ${adminEmail}`);
+        }
+    } catch (error) {
+        console.log('>>> ensureAdminExists error: ', error);
+    }
+}
+
 module.exports = {
-    createUserService, loginService, getUserService
+    createUserService, loginService, getUserService, ensureAdminExists
 }

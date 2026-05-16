@@ -166,7 +166,40 @@ const getProductBySlugService = async (slug) => {
     return Product.findOne({ slug }).lean();
 };
 
+const createProductService = async (data) => {
+    try {
+        const created = await Product.create(data);
+        return created;
+    } catch (error) {
+        console.log('createProductService error', error);
+        return null;
+    }
+};
+
+const updateProductService = async (id, data) => {
+    try {
+        const updated = await Product.findByIdAndUpdate(id, data, { new: true });
+        return updated;
+    } catch (error) {
+        console.log('updateProductService error', error);
+        return null;
+    }
+};
+
+const deleteProductService = async (id) => {
+    try {
+        const deleted = await Product.findByIdAndDelete(id);
+        return deleted;
+    } catch (error) {
+        console.log('deleteProductService error', error);
+        return null;
+    }
+};
+
 module.exports = {
     getProductsService,
     getProductBySlugService,
+    createProductService,
+    updateProductService,
+    deleteProductService,
 };

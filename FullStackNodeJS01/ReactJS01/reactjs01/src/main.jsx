@@ -10,6 +10,7 @@ import {
 import RegisterPage from './pages/register.jsx';
 import UserPage from './pages/user.jsx';
 import HomePage from './pages/home.jsx';
+import SearchPage from './pages/search.jsx';
 import LoginPage from './pages/login.jsx';
 import ProductDetailPage from './pages/productDetail.jsx';
 import NewsDetailPage from './pages/newsDetail.jsx';
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
                 index: true,
                 element: <HomePage />
             },
+                {
+                    path: "search",
+                    element: <SearchPage />
+                },
             {
                 path: "user",
                 element: <UserPage />

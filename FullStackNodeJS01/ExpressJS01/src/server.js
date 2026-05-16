@@ -4,6 +4,7 @@ const configViewEngine = require('./config/viewEngine');
 const connection = require('./config/database');
 const apiRoutes = require('./routes/api');
 const { getHomepage } = require('./controllers/homeController');
+const { ensureAdminExists } = require('./services/userService');
 const cors = require('cors');
 
 const app = express();
@@ -24,6 +25,7 @@ app.use('/v1/api/', apiRoutes);
 (async () => {
     try {
         await connection();
+        await ensureAdminExists();
         app.listen(port, () => {
             console.log(`Backend Nodejs App listening on port ${port}`);
         })

@@ -36,6 +36,11 @@ const getProductBySlugApi = (slug) => {
     return axios.get(URL_API);
 };
 
+const createProductApi = (data) => axios.post('/v1/api/admin/products', data);
+const updateProductApi = (id, data) => axios.put(`/v1/api/admin/products/${id}`, data);
+const deleteProductApi = (id) => axios.delete(`/v1/api/admin/products/${id}`);
+
 export {
-    createUserApi, loginApi, getUserApi, getAccountApi, getProductsApi, getProductBySlugApi
+    createUserApi, loginApi, getUserApi, getAccountApi, getProductsApi, getProductBySlugApi,
+    createProductApi, updateProductApi, deleteProductApi
 }
