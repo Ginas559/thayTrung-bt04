@@ -12,6 +12,12 @@ function App() {
 
     useEffect(() => {
         const fetchAccount = async () => {
+            const accessToken = localStorage.getItem('access_token');
+            if (!accessToken) {
+                dispatch(setAppLoading(false));
+                return;
+            }
+
             dispatch(setAppLoading(true));
             const res = await getAccountApi();
             if (res && !res.message) {
