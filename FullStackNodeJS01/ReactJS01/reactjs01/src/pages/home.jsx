@@ -2,9 +2,11 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
     CheckOutlined,
+    ClearOutlined,
     GiftOutlined,
     LoginOutlined,
     LogoutOutlined,
+    SearchOutlined,
     StarOutlined,
     ThunderboltOutlined,
     UpOutlined,
@@ -23,6 +25,23 @@ const HomePage = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const [filters, setFilters] = useState({
+        q: '',
+        category: '',
+        stockStatus: '',
+        sortBy: 'homeOrder',
+        minPrice: '',
+        maxPrice: '',
+        promotionOnly: false,
+        newestOnly: false,
+        bestSellingOnly: false,
+    });
+
+    const categoryOptions = [
+        'Bàn phím cơ / Gasket Mount',
+        'Bàn phím cơ / Compact Layout',
+        'Bàn phím cơ / TKL',
+    ];
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -36,7 +55,7 @@ const HomePage = () => {
             setError('');
 
             try {
-                const res = await getProductsApi();
+                const res = await getProductsApi(filters);
                 const data = Array.isArray(res) ? res : [];
                 setProducts(data);
             } catch {
@@ -47,7 +66,25 @@ const HomePage = () => {
         };
 
         fetchProducts();
-    }, [auth.isAuthenticated]);
+    }, [auth.isAuthenticated, filters]);
+
+    const handleFilterChange = (field, value) => {
+        setFilters((current) => ({ ...current, [field]: value }));
+    };
+
+    const clearFilters = () => {
+        setFilters({
+            q: '',
+            category: '',
+            stockStatus: '',
+            sortBy: 'homeOrder',
+            minPrice: '',
+            maxPrice: '',
+            promotionOnly: false,
+            newestOnly: false,
+            bestSellingOnly: false,
+        });
+    };
 
     const featuredProduct = useMemo(() => {
         return products.find((item) => item.slug === 'keynova-pro-75') || products[0] || null;
@@ -182,6 +219,78 @@ const HomePage = () => {
                             >
                                 <span>Xem mẫu mới nhất</span>
                             </Link>
+                        </div>
+
+                        <div className="mt-4 flex flex-wrap items-center gap-3">
+                            <input
+                                value={filters.q}
+                                onChange={(e) => handleFilterChange('q', e.target.value)}
+                                placeholder="Tìm kiếm theo tên, mô tả..."
+                                className="w-full max-w-[360px] rounded-2xl border border-slate-200 bg-white px-4 py-2 text-sm outline-none"
+                            />
+
+                            <select
+                                value={filters.category}
+                                onChange={(e) => handleFilterChange('category', e.target.value)}
+                                className="rounded-2xl border border-slate-200 bg-white px-4 py-2 text-sm outline-none"
+                            >
+                                <option value="">Tất cả danh mục</option>
+                                {categoryOptions.map((c) => (
+                                    <option key={c} value={c}>
+                                        {c}
+                                    </option>
+                                ))}
+                            </select>
+
+                            <select
+                                value={filters.stockStatus}
+                                onChange={(e) => handleFilterChange('stockStatus', e.target.value)}
+                                className="rounded-2xl border border-slate-200 bg-white px-4 py-2 text-sm outline-none"
+                            >
+                                <option value="">Tất cả kho</option>
+                                <option value="in-stock">Còn hàng</option>
+                                <option value="low-stock">Sắp hết</option>
+                                <option value="out-stock">Hết hàng</option>
+                            </select>
+
+                            <input
+                                value={filters.minPrice}
+                                onChange={(e) => handleFilterChange('minPrice', e.target.value)}
+                                placeholder="Giá từ"
+                                inputMode="numeric"
+                                className="w-28 rounded-2xl border border-slate-200 bg-white px-3 py-2 text-sm outline-none"
+                            />
+
+                            <input
+                                value={filters.maxPrice}
+                                onChange={(e) => handleFilterChange('maxPrice', e.target.value)}
+                                placeholder="Đến"
+                                inputMode="numeric"
+                                className="w-28 rounded-2xl border border-slate-200 bg-white px-3 py-2 text-sm outline-none"
+                            />
+
+                            <select
+                                value={filters.sortBy}
+                                onChange={(e) => handleFilterChange('sortBy', e.target.value)}
+                                className="rounded-2xl border border-slate-200 bg-white px-4 py-2 text-sm outline-none"
+                            >
+                                <option value="homeOrder">Mặc định</option>
+                                <option value="salePriceAsc">Giá tăng dần</option>
+                                <option value="salePriceDesc">Giá giảm dần</option>
+                                <option value="soldDesc">Bán chạy</option>
+                                <option value="stockAsc">Tồn kho ít</option>
+                                <option value="nameAsc">Tên A-Z</option>
+                            </select>
+
+                            <button onClick={() => setFilters((c) => ({ ...c }))} className="inline-flex items-center gap-2 rounded-full bg-slate-950 px-4 py-2 text-sm font-semibold text-white">
+                                <SearchOutlined />
+                                <span>Áp dụng</span>
+                            </button>
+
+                            <button onClick={clearFilters} className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700">
+                                <ClearOutlined />
+                                <span>Xóa</span>
+                            </button>
                         </div>
 
                         <div className="grid gap-4 sm:grid-cols-3">

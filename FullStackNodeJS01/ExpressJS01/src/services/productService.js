@@ -86,9 +86,79 @@ const ensureSeedProducts = async () => {
     }
 };
 
-const getProductsService = async () => {
+const parseMoneyValue = (value) => {
+    if (!value) return 0;
+    if (typeof value === 'number') return value;
+    const digits = String(value).replace(/[^\d]/g, '');
+    return Number(digits || 0);
+};
+
+const getProductsService = async (filters = {}) => {
     await ensureSeedProducts();
-    return Product.find({}).sort({ homeOrder: 1 }).lean();
+
+    const {
+        q = '',
+        category = '',
+        stockStatus = '',
+        sortBy = 'homeOrder',
+        minPrice = '',
+        maxPrice = '',
+        promotionOnly = false,
+        newestOnly = false,
+        bestSellingOnly = false,
+    } = filters || {};
+
+    let data = await Product.find({}).lean();
+
+    const keyword = String(q || '').trim().toLowerCase();
+    if (keyword) {
+        data = data.filter((item) => {
+            const searchable = [item.name, item.category, item.description, item.highlight, item.promotionTitle, item.promotionDescription]
+                .filter(Boolean)
+                .join(' ')
+                .toLowerCase();
+            return searchable.includes(keyword);
+        });
+    }
+
+    if (category) {
+        const cat = String(category).trim().toLowerCase();
+        data = data.filter((item) => String(item.category || '').toLowerCase() === cat);
+    }
+
+    if (stockStatus === 'in-stock') data = data.filter((it) => Number(it.stock || 0) > 0);
+    if (stockStatus === 'low-stock') data = data.filter((it) => Number(it.stock || 0) > 0 && Number(it.stock || 0) <= 10);
+    if (stockStatus === 'out-stock') data = data.filter((it) => Number(it.stock || 0) <= 0);
+
+    if (promotionOnly === 'true' || promotionOnly === true) data = data.filter((it) => it.promotionTitle);
+    if (newestOnly === 'true' || newestOnly === true) data = data.filter((it) => it.newestLabel);
+    if (bestSellingOnly === 'true' || bestSellingOnly === true) data = data.filter((it) => it.bestSellingQuantity);
+
+    const minPriceText = String(minPrice || '').trim();
+    const maxPriceText = String(maxPrice || '').trim();
+    const minPriceValue = minPriceText === '' ? null : Number(minPriceText);
+    const maxPriceValue = maxPriceText === '' ? null : Number(maxPriceText);
+
+    if (minPriceValue !== null && !Number.isNaN(minPriceValue)) {
+        data = data.filter((it) => parseMoneyValue(it.salePrice) >= minPriceValue);
+    }
+    if (maxPriceValue !== null && !Number.isNaN(maxPriceValue)) {
+        data = data.filter((it) => parseMoneyValue(it.salePrice) <= maxPriceValue);
+    }
+
+    const sorters = {
+        homeOrder: (a, b) => (a.homeOrder || 0) - (b.homeOrder || 0),
+        salePriceAsc: (a, b) => parseMoneyValue(a.salePrice) - parseMoneyValue(b.salePrice),
+        salePriceDesc: (a, b) => parseMoneyValue(b.salePrice) - parseMoneyValue(a.salePrice),
+        soldDesc: (a, b) => Number(b.sold || 0) - Number(a.sold || 0),
+        stockAsc: (a, b) => Number(a.stock || 0) - Number(b.stock || 0),
+        stockDesc: (a, b) => Number(b.stock || 0) - Number(a.stock || 0),
+        nameAsc: (a, b) => String(a.name || '').localeCompare(String(b.name || ''), 'vi'),
+    };
+
+    (data || []).sort(sorters[sortBy] || sorters.homeOrder);
+
+    return data;
 };
 
 const getProductBySlugService = async (slug) => {
