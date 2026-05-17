@@ -1,6 +1,7 @@
 require('dotenv').config();
 // import các nguồn cần dùng
 const express = require('express'); // commonjs
+const ejs = require('ejs'); // Ép Vercel nhận diện bundle module ejs
 const configViewEngine = require('./config/viewEngine');
 const apiRoutes = require('./routes/api');
 const connection = require('./config/database');
@@ -20,6 +21,8 @@ app.use(cors()); // config cors
 app.use(express.json()) // config req.body cho json
 app.use(express.urlencoded({ extended: true })) // for form data
 
+// Ép cấu hình engine trực tiếp tại đây để tránh lỗi Serverless Bundling
+app.engine('ejs', ejs.__express);
 configViewEngine(app); // config template engine
 
 // config route cho view ejs
