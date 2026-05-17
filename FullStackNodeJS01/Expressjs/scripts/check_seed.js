@@ -6,10 +6,13 @@ const Keyboard = require(path.join(__dirname, '../src/models/keyboard'));
 const User = require(path.join(__dirname, '../src/models/user'));
 const Category = require(path.join(__dirname, '../src/models/category'));
 
-const MONGO = process.env.MONGO_DB_URL || 'mongodb://localhost:27017/fullstack02';
+const MONGO = process.env.MONGO_DB_URL;
 
 async function run(){
   try{
+    if (!MONGO) {
+      throw new Error('MONGO_DB_URL is not set');
+    }
     await mongoose.connect(MONGO);
     const k = await Keyboard.countDocuments();
     const u = await User.countDocuments();

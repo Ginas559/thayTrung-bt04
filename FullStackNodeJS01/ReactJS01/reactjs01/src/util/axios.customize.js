@@ -1,8 +1,8 @@
 import axios from "axios";
 import { clearAuthSession, getAccessToken, getRefreshToken, setAuthSession } from "./auth.storage";
 
-// Set config defaults when creating the instance
-const baseURL = import.meta.env.VITE_BACKEND_URL;
+// Use the explicit backend URL when provided; otherwise fall back to the current origin for deployment setups.
+const baseURL = import.meta.env.VITE_BACKEND_URL || window.location.origin;
 
 const instance = axios.create({
     baseURL
