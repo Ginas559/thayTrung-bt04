@@ -52,12 +52,16 @@ app.use('/v1/api/', apiRoutes);
 
         await seedKeyboardsCollections();
         await seedArticlesCollections();
-        
-        // lắng nghe port trong env
-        app.listen(port, () => {
-            console.log(`Backend Nodejs App listening on port ${port}`)
-        })
+
+        if (!process.env.VERCEL) {
+            // lắng nghe port trong env khi chạy local
+            app.listen(port, () => {
+                console.log(`Backend Nodejs App listening on port ${port}`)
+            })
+        }
     } catch (error) {
         console.log(">>> Error connect to DB: ", error)
     }
 })()
+
+module.exports = app;
