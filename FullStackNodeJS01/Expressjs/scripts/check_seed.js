@@ -6,7 +6,9 @@ const Keyboard = require(path.join(__dirname, '../src/models/keyboard'));
 const User = require(path.join(__dirname, '../src/models/user'));
 const Category = require(path.join(__dirname, '../src/models/category'));
 
-const MONGO = process.env.MONGO_DB_URL;
+const MONGO = process.env.MONGO_DB_URL
+  || process.env.MONGODB_URI
+  || (!process.env.VERCEL ? 'mongodb://localhost:27017/fullstack02' : undefined);
 
 async function run(){
   try{

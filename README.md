@@ -1,4 +1,7 @@
-Da lam cau 4: Sử dụng Axios để gọi API của bài tập 02, Redux Hook để quản lý state cho chức năng trên.
+Link deloy trên vercel: https://thay-trung-bt04.vercel.app/
+tài khoản user: tự đăng ký có gửi otp
+tài khoản admin: admindoaibiet@gmail.com
+            pass: 123456
 
 Bao Gồm cả FE và BE
 
